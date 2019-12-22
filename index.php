@@ -6,12 +6,8 @@
  * Time: 06:13 ص
  */
 require('includes/config.php');
-require('includes/message.php');
 require('includes/messagesClass.php');
-try{
-    echo'<pre>';
-$messageClass = new messagesClass();
-print_r($messageClass->getMessage(60));
-}catch (Exception $e){
-    echo $e->getMessage();
-}
+$messageObject = new messagesClass();
+$allMessages=$messageObject->getMessageByStatus(1);
+include('templates/front/index.html');
+
