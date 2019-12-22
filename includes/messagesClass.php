@@ -51,11 +51,32 @@ class messagesClass {
     public function getMessageByStatus(){
 
     }
-    public function UpdateMessage($is){
+
+    /**
+     * update Message
+     * @param message $m
+     * @throws Exception
+     */
+    public function UpdateMessage(message $m){
+        $id        = $m->getId();
+        $title     = $m->getTitle();
+        $message   = $m->getMessage();
+        $published = $m->getPublished();
+        $qurey = $this->connection->query("UPDATE `messages` SET `title`='$title',`message`='$message',`published`=$published,`date`=NOW() WHERE `id`= $id");
+        if(!$qurey || $this->connection->affected_rows == 0)
+            throw new Exception('Error Updating In Database'.$this->connection->error);
 
     }
-    public function deleteMessage(){
 
+    /**
+     * Delete message from db
+     * @param $id
+     * @throws Exception
+     */
+    public function deleteMessage($id){
+        $qurey = $this->connection->query("DELETE FROM `messages` WHERE `id`= $id");
+        if(!$qurey || $this->connection->affected_rows == 0)
+            throw new Exception('Error Deleting From Database'.$this->connection->error);
     }
 
 } 
