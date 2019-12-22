@@ -39,17 +39,57 @@ class messagesClass {
 
         return true;
     }
-    public function getMessages(){
 
+    /**
+     * get All messages
+     * @param null $Extra
+     * @return array
+     * @throws Exception
+     */
+    public function getMessages($Extra = null){
+        $query = $this->connection->query("SELECT * FROM `messages` $Extra");
+        if(!$query)
+            throw new Exception('Error Fetching Data From Database');
+        $message = [];
+        while($row = $query->fetch_assoc()){
+            $message[]=$row;
+        }
+        return $message;
     }
+
+    /**
+     * get message by Id
+     * @param $id
+     * @return mixed
+     * @throws Exception
+     */
     public function getMessage($id){
-
+        $message = $this->getMessages("WHERE `id` = $id");
+        if(count($message)>0)
+            return $message[0];
+        return[];
     }
-    public function SearchMessages(){
 
+    /**
+     * search messages using title and message
+     * @param $keyword
+     * @return array
+     * @throws Exception
+     */
+    public function SearchMessages($keyword){
+        $messages = $this->getMessages("WHERE `title` LIKE '%$keyword%' OR `message` LIKE '%$keyword%'");
+        return $messages;
     }
-    public function getMessageByStatus(){
 
+    /**
+     * git message by status
+     * @param int $published
+     * @return array
+     * @throws Exception
+     */
+    public function getMessageByStatus($published = 1){
+        $messages = $this->getMessages("WHERE `published` = $published");
+        return $messages;
     }
 
     /**

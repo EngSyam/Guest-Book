@@ -9,8 +9,9 @@ require('includes/config.php');
 require('includes/message.php');
 require('includes/messagesClass.php');
 try{
+    echo'<pre>';
 $messageClass = new messagesClass();
-$messageClass->deleteMessage(4);
+print_r($messageClass->getMessage(60));
 }catch (Exception $e){
     echo $e->getMessage();
 }
