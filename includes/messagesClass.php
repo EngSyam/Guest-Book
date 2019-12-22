@@ -111,12 +111,14 @@ class messagesClass {
     /**
      * Delete message from db
      * @param $id
+     * @return bool
      * @throws Exception
      */
     public function deleteMessage($id){
         $qurey = $this->connection->query("DELETE FROM `messages` WHERE `id`= $id");
         if(!$qurey || $this->connection->affected_rows == 0)
             throw new Exception('Error Deleting From Database'.$this->connection->error);
+        return true;
     }
 
 } 
