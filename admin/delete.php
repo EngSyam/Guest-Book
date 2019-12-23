@@ -7,14 +7,25 @@
  */
 require('../includes/config.php');
 require('../includes/messagesClass.php');
-$id = isset($_GET['id'])?$_GET['id']:0;
-$messageObj = new messagesClass();
+include'../templates/admin/header.html';
+$deleted = false;
+$message = '';
 try {
-
-    if ($messageObj->deleteMessage($id))
-        echo 'deleted';
+    $id = isset($_GET['id'])?$_GET['id']:0;
+    $messageObj = new messagesClass();
+    if ($messageObj->deleteMessage($id)){
+        $deleted=true;
+        $message='Message deleted Successfully';
+    }
+    else{
+        $deleted=false;
+        $message='Error deleting Message';
+    }
 }
 catch (Exception $e){
-    echo $e->getMessage().'<br>';
+    $deleted=false;
+    $message = $e->getMessage().'<br>';
     echo'not deleted';
 }
+include'../templates/admin/delete.html';
+include'../templates/admin/footer.html';

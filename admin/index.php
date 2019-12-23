@@ -7,7 +7,9 @@
  */
 require('../includes/config.php');
 require('../includes/messagesClass.php');
+
 $messageObject = new messagesClass();
 $allMessages=$messageObject->getMessages();
-
+include('../templates/admin/header.html');
 include('../templates/admin/index.html');
+include('../templates/admin/footer.html');
