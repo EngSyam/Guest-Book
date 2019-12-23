@@ -95,6 +95,7 @@ class messagesClass {
     /**
      * update Message
      * @param message $m
+     * @return bool
      * @throws Exception
      */
     public function UpdateMessage(message $m){
@@ -105,7 +106,7 @@ class messagesClass {
         $qurey = $this->connection->query("UPDATE `messages` SET `title`='$title',`message`='$message',`published`=$published,`date`=NOW() WHERE `id`= $id");
         if(!$qurey || $this->connection->affected_rows == 0)
             throw new Exception('Error Updating In Database'.$this->connection->error);
-
+        return true;
     }
 
     /**
