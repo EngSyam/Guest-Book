@@ -1,7 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Syamٍ
- * Date: 12/22/2019
- * Time: 06:15 ص
- */ 
+include'../includes/usersClass.php';
+usersClass::logout();
+header('LOCATION:login.php');

@@ -7,6 +7,9 @@
  */
 require('../includes/config.php');
 require('../includes/messagesClass.php');
+require('../includes/usersClass.php');
+if(!usersClass::Check())
+    header('LOCATION: login.php');
 
 $messageObject = new messagesClass();
 $allMessages=$messageObject->getMessages();

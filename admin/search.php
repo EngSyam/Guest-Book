@@ -7,6 +7,10 @@
  */
 require('../includes/config.php');
 require('../includes/messagesClass.php');
+require('../includes/usersClass.php');
+if(!usersClass::Check())
+    header('LOCATION: login.php');
+
 $keyword = isset($_GET['keyword'])?$_GET['keyword']:'';
 $messageObj = new messagesClass();
 $allMessages=$messageObj->SearchMessages($keyword);

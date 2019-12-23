@@ -10,6 +10,8 @@ require('../includes/messagesClass.php');
 require('../includes/message.php');
 include'../templates/admin/header.html';
 include'../includes/usersClass.php';
+if(!usersClass::Check())
+    header('LOCATION: login.php');
 
 $messagesOb = new messagesClass();
 if(count($_POST)>0)

@@ -8,6 +8,10 @@
 require('../includes/config.php');
 require('../includes/messagesClass.php');
 include'../templates/admin/header.html';
+include'../includes/usersClass.php';
+if(!usersClass::Check())
+    header('LOCATION: login.php');
+
 $deleted = false;
 $message = '';
 try {
